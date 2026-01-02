@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Channels Demo</title>
+</head>
+<body>
+  <h1>Live Counter</h1>
+  <h2 id="count">0</h2>
+  <button onclick="increment()">Increment</button>
+
+  <script>
+    let socket = new WebSocket("ws://localhost:8003/ws/counter/");
+
+    socket.onmessage = function(event) {
+      document.getElementById("count").innerText = event.data;
+    };
+
+    function increment() {
+      socket.send("increment");
+    }
+  </script>
+</body>
+</html>
